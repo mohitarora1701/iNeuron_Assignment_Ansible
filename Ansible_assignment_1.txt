@@ -1,0 +1,69 @@
+Q1.What is the difference between CI and CD
+Ans.CI stands for continuous integration, a fundamental DevOps best practice where developers frequently merge code changes into a central repository where automated builds and tests run. 
+    But CD can either mean continuous delivery or continuous deployment.
+
+
+Q2.What is Configuration Management, and how does it work?
+Ans.Configuration management is a process for maintaining computer systems, servers, and software in a desired, consistent state. 
+    It's a way to make sure that a system performs as it's expected to as changes are made over time.
+
+
+Q3.What is Ansible, and describe it’s working?
+Ans.Ansible is an open source DevOps tool which can help the business in configuration management, deployment, provisioning, etc. It is straightforward to deploy; 
+    it leverages SSH to communicate between servers. It uses the playbook to describe automation jobs, and playbook uses a very simple language YAML.
+
+
+Q4.What distinguishes Ansible from other similar tools?
+Ans.Ansible's unique selling points are its lightweight, relative ease of use and speed of deployment compared to other CM tools. 
+    In contrast to Chef, you don't need to learn Ruby to use Ansible. This is because Ansible packages all commands into YAML modules called playbooks.
+
+
+
+Q5.What is the purpose of the Ansible Galaxy?
+Ans.Ansible Galaxy refers to the Galaxy website where users can share roles, and to a command line tool for installing, creating and managing roles.
+
+
+Q6.Can you go over the Ansible modules in detail?
+Ans.Module are discrete units of code that can be used from the command line or in a playbook task. Ansible executes each module, usually on the remote managed node, and collects return values. 
+    In Ansible 2.10 and later, most modules are hosted in collections.
+
+
+Q7.What is a YAML file, and how does Ansible use it?
+Ans.Ansible uses YAML syntax for expressing Ansible playbooks. This chapter provides an overview of YAML. Ansible uses YAML because it is very easy for humans to understand, 
+    read and write when compared to other data formats like XML and JSON.Every YAML file optionally starts with “---” and ends with “...”.
+
+
+Q8.What are the different types of Ansible tasks?
+Ans.A task is the smallest unit of action you can automate using an Ansible playbook. Playbooks typically contain a series of tasks that serve a goal, such as to set up a web server, 
+    or to deploy an application to remote environments.Ansible executes tasks in the same order they are defined inside a playbook.
+
+
+Q9.What are the best ways to use YAML files in high-level programming languages like Java, Python, and others?
+Ans.Python
+
+
+Q10.How to set up a jump host to access servers having no direct access?
+Ans.The simplest way to connect to a target server via a jump host is using the -J flag from the command line. This tells ssh to make a connection to the jump host and then establish a 
+    TCP forwarding to the target server, from there (make sure you’ve Passwordless SSH Login between machines)
+
+
+Q11.How can I use encrypted files to automate password entry in a playbook?
+Ans.With ansible-vault you can encrypt any structured data file used by Ansible. So ansible vault encrypt file can encrypt files or playbooks used by Ansible.
+    Ex: ansible-vault create --vault-id @prompt secret.yml
+
+
+Q12.What are Ansible callback plugins?
+Ans.Callback plugins enable adding new behaviors to Ansible when responding to events. By default, callback plugins control most of the output you see when running the command line programs, 
+    but can also be used to add additional output, integrate with other tools and marshal the events to a storage backend.
+
+
+Q13.What is Ansible Inventory and what are the many types of it?
+Ans.A host inventory file is a text file that consists of hostnames or IP addresses of managed hosts or remote servers.
+    In Ansible, there are two types of inventory files: Static and Dynamic.
+    Static:-A static inventory file is a plain text file that contains a list of managed hosts declared under a host group using either hostnames or IP addresses.
+    Dynamic:-A dynamic inventory is a script written in Python, PHP or any other programming language. It comes in handy in cloud environments such as AWS where IP addresses change once a virtual 
+             server is stopped and started again.
+
+
+Q14.What is an Ansible Vault, exactly?
+Ans.Ansible Vault is an Ansible feature that helps you encrypt confidential information without compromising security

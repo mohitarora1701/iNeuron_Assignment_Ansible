@@ -1,0 +1,132 @@
+Q1.Describe the Ansible register.
+Ans.Ansible register is a way to capture the output from task execution and store it in a variable. This is an important feature, as this output is different for each remote host, 
+    and the basis on that we can use conditions loops to do some other tasks. Also, each register value is valid throughout the playbook execution.
+
+
+Q2.In Ansible, how can we delegate tasks?
+Ans.There are many playbooks in the projects that sometimes require to run tasks or the entire playbook on the local machine that hosts the inventory file or playbook, 
+    or we can say on the different remote hosts that are different from the remote hosts that are mentioned in the inventory list to run tasks  In that situation, we can use the 
+    delegate_to parameter so that the tasks can run locally.Once the first task is executed, the second task will be delegated to the localhost or the specified mentioned delegated hosts, 
+    so the control is assigned to the delegated host, and when the second task completes, the control is reassigned to the controller node (that is ansible host) to run the task again on 
+    the remote inventory host if the delegate_to is not specified. So it is a two-way process.
+
+
+Q3.What is the best way to install Ansible on a CentOS system?
+Ans.-> 1. yum update
+    -> 2. yum install epel-release
+    -> 3. yum install ansible
+    -> 4. create a non-root user on both the nodes that will run our Ansible playbooks.
+    -> 5. Configure Our Admin User for SSH Access
+          ssh-keygen
+          ssh-copy-id node.kb.liquidweb.com
+    -> 6. Create an Inventory
+          vim /home/admin/inventory
+
+
+Q4.What is Ansible and how does it differ from other Configuration Management software?
+Ans.Ansible is a radically simple IT automation engine that automates cloud provisioning, configuration management, application deployment, intra-service orchestration, and many other IT needs.
+    Ansible is open source software,and doesn’t rely on a client-server model. 
+
+
+Q5.What are the various parts of ansible? Describe the architecture of Ansible.
+Ans.    Modules
+        Module utilities
+        Plugins
+        Inventory
+        Playbooks
+
+    Playbooks here actually define your workflow because whatever tasks that you write in a playbook, it gets executed in the same order that you have written them. They are written in YAML format, 
+    which describes the tasks and executes through the Ansible. Also, you can launch the tasks synchronously and asynchronously with playbooks.
+    The above architecture has a bunch of Host machines to which ansible server connects and pushes the playbooks through SSH. It is not always needed to use an SSH for connecting with your host machines;
+    you can also use a connection plug-in. For example, Ansible provides you with a docker container connection plugin and using that connection plug-in, you can easily connect to all your Docker containers 
+    and start configuring right away.
+    It has an Ansible automation engine using which users can directly run a playbook that gets deployed on the hosts. There are multiple components in the Ansible automation engine. The first is a host inventory. 
+    It’s a list of all the IP addresses of all the hosts. Let’s go one by one, in the Ansible automation engine.
+    Ansible works against multiple systems in your infrastructure at the same time. It does this by selecting portions of systems listed in Ansible’s inventory file, which defaults to being saved in the 
+    location /etc/ansible/hosts. You can specify a different inventory file using the -i <path> option on the command line.
+
+
+
+Q6.What are the requirements for Ansible Server?
+Ans.-Supported Operating Systems:
+        Red Hat Enterprise Linux 6 64-bit
+        Red Hat Enterprise Linux 7 64-bit
+        CentOS 6 64-bit
+        CentOS 7 64-bit
+        Ubuntu 12.04 LTS 64-bit
+        Ubuntu 14.04 LTS 64-bit
+    -The latest stable release of Ansible
+
+    -2 GB RAM minimum (4+ GB RAM recommended)
+        2 GB RAM (minimum and recommended for Vagrant trial installations)
+        4 GB RAM is recommended per 100 forks
+    -20 GB hard disk
+
+    -64-bit support required (kernel and runtime)
+
+    -For Amazon EC2:
+        Instance size of m3.medium or larger
+        An instance size of m3.xlarge or larger if there are more than 100 hosts
+
+
+
+Q7.Describe a handful of Ansible's basic terms and concepts.
+Ans.    - Control node
+        - Managed nodes
+        - Inventory
+        - Playbooks
+            Plays
+                Roles
+                Tasks
+                Handlers
+        - Modules
+        - Plugins
+        - Collections
+        - AAP("Ansible Automation Platform")
+
+
+
+Q8.Describe the Infrastructure as Code idea (IaC).
+Ans.Infrastructure as code (IaC) is the process of managing and provisioning computer data centers through machine-readable definition files, rather than physical 
+    hardware configuration or interactive configuration tools.
+
+
+
+Q9.What do you mean by ad-hoc commands? Give a specific example.
+Ans.Ad hoc commands are commands which can be run individually to perform quick functions. These commands need not be performed later.
+    example:  ansible abc -a "/sbin/reboot" -f 12   (To run reboot for all your company servers in a group, 'abc', in 12 parallel forks)
+
+
+
+Q10.In Ansible, what are the variables?
+Ans.Variable in playbooks are very similar to using variables in any programming language. It helps you to use and assign a value to a variable and use that anywhere in the playbook.
+    One can put conditions around the value of the variables and accordingly use them in the playbook.
+
+
+
+Q11. What is the difference between a variable name and a variable that is part of the environment?
+Ans. variable name define inside the on the other hand variable that is part of the environment is a dynamic-named value that can affect the way running processes will behave on a computer.
+
+
+Q12.What are the Ansible Modules, and what do they do? Describe its various types.
+Ans.Ansible modules are standalone scripts that can be used inside an Ansible playbook.
+    Modules are discrete units of code that can be used from the command line or in a playbook task. Ansible executes each module, usually on the remote managed node, and collects return values. 
+    In Ansible 2.10 and later, most modules are hosted in collections.
+    Types:
+        -Package management
+        -Service
+        -Copy
+        -Debug
+        -File
+        -Lineinfile
+        -Git
+        -Cli_command
+        -Archive
+        -Command
+
+
+
+Q13.What is an Ansible Task, exactly?
+Ans.A task is the smallest unit of action you can automate using an Ansible playbook. Playbooks typically contain a series of tasks that serve a goal, such as to set up a web server, 
+    or to deploy an application to remote environments. Ansible executes tasks in the same order they are defined inside a playbook.
+

@@ -1,0 +1,130 @@
+Q1.How can a list of hosts in a group be looped over within a template?
+Ans.{% for host in groups['db_servers'] | intersect(groups['qa']) %}
+        {{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}
+    {% endfor %}
+
+
+
+Q2.What is Ansible's ad-hoc command?
+Ans.An Ansible ad hoc command uses the /usr/bin/ansible command-line tool to automate a single task on one or more managed nodes. ad hoc commands are quick and easy, but they are not reusable.
+
+
+Q3.How do I set up Nginx using the Ansible playbook?
+Ans.- hosts: web
+  become: yes
+  tasks:
+  - name: "apt-get update"
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+
+  - name: "install nginx"
+    apt:
+      name: ['nginx']
+      state: latest
+
+  - name: "create www directory"
+    file:
+      path: /var/www/{{ domain }}
+      state: directory
+      mode: '0775'
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+
+  - name: delete default nginx site
+    file:
+      path: /etc/nginx/sites-enabled/default
+      state: absent
+    notify: restart nginx
+
+  - name: copy nginx site.conf
+    template:
+      src: site.conf.j2
+      dest: /etc/nginx/sites-enabled/{{ domain }}
+      owner: root
+      group: root
+      mode: '0644'
+    notify: restart nginx
+
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+
+Command:- ansible-playbook -i inventory.yml nginx.yml
+
+
+
+Q4.How do I programmatically access the name of a variable?
+Ans.- hosts: app_servers
+    vars:
+       app_path: "{{ base_path }}/22"
+
+
+
+Q5.How do Ansible and Puppet vary from one other?
+Ans.Ease of Setup and Use: Ansible is widely considered to be simpler to install and use. Puppet is model-driven and was built with systems administrators in mind.
+    Management and Scheduling: In Puppet, the client pulls configurations from the server, whereas in Ansible, the server pushes configurations to the nodes, for instantaneous deployment.
+    Availability: Both Ansible and Puppet have backups in case of failure, meaning availability need never be interrupted. Ansible has a secondary node in case the active node fails, 
+                  and Puppet has more than one master in case the original master fails.
+
+    Scalability: Both tools are highly scalable, meaning they can handle a big increase in nodes with no problem. However, scalability is generally considered to be easier in Ansible.
+    Modules: Puppet Forge is huge (almost 6,000 modules), and the modules can be marked as approved/supported by Puppet, so you won’t have to waste your time on ones that haven’t been proven to work.
+             Galaxy doesn’t have this feature, so you may have to spend some time and effort changing things manually.
+
+    GUI: Puppet’s graphical user interface (GUI) is more highly developed than Ansible’s. It’s used for viewing, managing and monitoring; for more complex tasks, 
+         you’ll probably use the command-line interface CLI, which is based on Ruby.
+         Ansible was a command-line-only tool. Now you can get a UI if you use the enterprise version, but it’s by no means perfect. In fact, the GUI is sometimes not in sync with the command line, 
+         and it can’t do all the same things as the CL.
+    Pricing: The basic versions of both Puppet and Ansible are free and open source. As for the commercial versions, you’ll pay depending on the support level you need, as follows.
+
+
+
+Q6.What is the purpose of Ansible Tower, and what are its characteristics?
+Ans.Ansible Tower is the enterprise version of Ansible. It allows sysadmins to deploy all of the benefits of Ansible at scale. And, like Ansible, it integrates with a broad base of your existing 
+    technology infrastructure: networking, security, application deployment, storage, software development lifecycle processes, etc.
+
+
+Q7.Describe how you'll recursively copy files to a destination host.
+Ans.Scp is an acronym for Secure Copy. The scp tool is used to securely copy files to and from a remote computer using the secure shell protocol (SSH.)
+    "scp <option> <source> <destination>"
+
+
+Q8.What is the most effective method for making content reusable and redistributable?
+Ans.Includes, Imports, and Roles.
+
+
+
+Q9.What are handlers, and what do they do?
+Ans.Handlers are special tasks that only get executed when triggered via the notify directive. Handlers are executed at the end of the play, once all tasks are finished.
+    In Ansible, handlers are typically used to start, reload, restart, and stop services.
+
+
+
+Q10.How can a user module generate encrypted passwords?
+Ans.sudo apt update
+    sudo apt install python3 python3-bcrypt
+    python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
+
+
+Q11.What is the difference between dot notation and array notation for variables?
+Ans.The dot notation is used mostly as it is easier to read and comprehend and also less verbose. The main difference between dot notation and bracket notation is that the bracket notation 
+    allows us to access object properties using variable.
+
+
+
+
+Q12.What is the purpose of the Ansible synchronize module?
+Ans.Ansible Synchronize is used to copy the files between remote servers (or) target hosts.  This is more like performing RSYNC with help of Ansible.
+
+
+Q13.What is the purpose of the Ansible firewalld module?
+Ans.This module allows for addition or deletion of services and ports either tcp or udp in either running or permanent firewalld rules.
+
+
+
+Q14.What distinguishes the Ansible set fact module from vars, vars file, and include var?
+Ans.This action allows setting variables associated to the current host.
+    These variables will be available to subsequent plays during an ansible-playbook run via the host they were set on.
+

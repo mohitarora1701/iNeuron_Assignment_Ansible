@@ -1,0 +1,40 @@
+Q1.How can I set the PATH variable for a task or any other environment variable?
+Ans.- In the System > About window, click the Advanced system settings link at the bottom of the Device specifications section.
+    - In the System Properties window, click the Advanced tab, then click the Environment Variables button near the bottom of that tab.
+    - In the Environment Variables window (pictured below), highlight the Path variable in the System variables section and click the Edit button. Add or modify the path lines with the paths 
+    you want the computer to access.
+
+
+Q2.How can encrypted passwords for the user module be generated?
+Ans.    - ansible-vault view my_vault.yml
+
+
+
+Q3.How can a list of hosts in a group be looped over within a template?
+Ans.{% for host in groups['db_servers'] %}
+    {{ host }}
+    {% endfor %}
+
+
+
+Q4.What is the best way to see all of my host's inventory variables?
+Ans.    - ansible-inventory --list --yaml
+
+
+Q5.How should I set up a jump host to connect to servers that I don't have direct access to?
+Ans.    - ssh -J host1 host2
+
+
+Q6.How do you deal with different machines that require different user accounts or ports to log in?
+Ans.
+
+
+
+Q7.Assume you're configuring the production environment with Ansible, and your playbook uses an encrypted file. Passwords must be entered while using encrypted files. 
+    Can this process be automated, though, given Ansible is utilized for automation?
+Ans.We can automate this process through ansible because we have the encrypted file and encrypted password so we can easily automate that production task safely.
+
+
+
+Q8.Is Ansible a free and open-source software?
+Ans.Ansible, the best free and open source automation engine is something one must embrace whether one wants to automate his configuration & management or DevOps tasks.
